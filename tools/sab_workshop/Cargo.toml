@@ -1,0 +1,63 @@
+[package]
+name = "sab_workshop"
+version = "0.1.0"
+edition = "2021"
+description = "Native wgpu+egui viewer for The Saboteur characters: skinned mesh + searchable animation playback."
+license = "MIT"
+
+[[bin]]
+name = "sab_workshop"
+path = "src/main.rs"
+
+[dependencies]
+# Window + GPU + UI. This exact set (winit 0.29 / wgpu 0.20 / egui 0.28) mirrors the
+# Mercs2 workshop; the egui<->winit event bridge is hand-rolled (src/gui.rs) because
+# egui-winit 0.28 pins winit 0.30, which conflicts with winit 0.29.
+winit = "0.29"
+wgpu = "0.20"
+egui = "0.28"
+egui-wgpu = "0.28"
+glam = "0.27"
+bytemuck = { version = "1", features = ["derive"] }
+# Native OS file/folder pickers for the Settings page path fields — no hand-typed paths.
+rfd = "0.14"
+# PNG encode for the "Export texture" button (decoded RGBA -> .png).
+png = "0.17"
+pollster = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# DTEX textures store their mip payload as zlib streams (same as the game). Decode path copied
+# into src/dtex.rs from tools/sab_dtex.
+flate2 = "1"
+# OS clipboard for the inspector's copy actions — the hand-rolled egui bridge must deliver egui's
+# PlatformOutput.copied_text itself (egui-winit would normally do this). See src/gui.rs.
+arboard = "3"
+# Shared Saboteur format codecs for the mod-editor pages: GameText.dlg (Cinematics/Dialog/<Lang>)
+# and GameTemplates.wsd (AULB). Both byte-verified against retail. See src/editor.rs.
+sab_formats = { path = "../sab_formats" }
+# The placement-editing session, journal, project files and EditNodes override staging behind the
+# "places" page (src/placements.rs). The UI holds no format or staging code of its own.
+sab_tools = { path = "../sab_tools" }
+# Read-only terrain heights and ray picking for the places page (Codex's crate, merged from
+# codex/terrain-geometry-20261103; docs/formats/terrain_query_milestone.md). See src/place_terrain.rs.
+sab_terrain_query = { path = "../sab_terrain_query" }
+# Translate gizmo for the places page's 3D view (src/placements_view.rs). Draws through the egui
+# painter, so it needs no wgpu pass. MIT OR Apache-2.0; audited in docs/level_editor/_audit.
+transform-gizmo-egui = "0.3.0"
+# Memory-map the megapacks so opening a 715 MB pack is instant (no eager read) and only the sub-pack
+# headers / bundles actually touched fault into RAM — the index is the earmark. See src/pack.rs.
+memmap2 = "0.9"
+# Plays a voice line's decoded PCM (sab_formats decodes both builds' codecs) on the default output
+# device. Playback only: no rodio decoders.
+rodio = { version = "0.23", default-features = false, features = ["playback"] }
+
+[features]
+# Game-gated tests: they read the install paths from the repo-root `.sab-local.toml`.
+retail = []
+
+[dev-dependencies]
+# Synthetic terrain meshes for the place_terrain tests.
+sab_terrain = { path = "../sab_terrain" }
+# Read the cmap of the fonts we ship, so `gui::theme::tests::glyphs_are_covered` can prove every UI
+# symbol is actually drawable. Not a new download: egui already pulls this in via ab_glyph.
+ttf-parser = "0.25"

@@ -1,0 +1,70 @@
+[package]
+name = "sab_tools"
+version = "0.1.0"
+edition = "2021"
+description = "Command-line tools for The Saboteur (2009) over sab_formats. Holds the level-editor M0 experiment staging command (`sab_tools m0`)."
+license = "MIT"
+
+[lib]
+name = "sab_tools"
+path = "src/lib.rs"
+
+[[bin]]
+name = "sab_tools"
+path = "src/main.rs"
+
+[[bin]]
+name = "sab_headless"
+path = "src/bin/sab_headless.rs"
+
+[features]
+# Game-gated tests: they read the install path from the repo-root `.sab-local.toml`.
+retail = []
+
+[dependencies]
+sab_formats = { path = "../sab_formats" }
+# The world megapacks are up to 2 GB; map them instead of reading them.
+memmap2 = "0.9"
+# Every staged artifact, source file and install destination is recorded by SHA-256.
+sha2 = "0.10"
+serde_json = "1"
+
+[[test]]
+name = "agent_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "areas_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "c2_cells_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "cell_session_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "collision_probe_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "collision_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "headless_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "session_retail"
+required-features = ["retail"]
+
+[[test]]
+name = "cell_project_process"
+required-features = ["retail"]
+
+[[test]]
+name = "livelink_in_game"
+required-features = ["retail"]

@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = [
+    "tools/sab_workshop",
+    "tools/sab_formats",
+    "tools/sab_tools",
+    "tools/sab_terrain",
+    "tools/sab_terrain_query",
+]
+default-members = ["tools/sab_workshop", "tools/sab_tools"]
+
+[profile.release]
+opt-level = 3

@@ -1,0 +1,4 @@
+# Optional: used only by tests built with the retail feature.
+# Copy to .sab-local.toml and set paths to your own game installations.
+retail_dir = "D:/Games/The Saboteur"
+# proto2008_dir = "D:/Games/Saboteur prototype/Bin360"

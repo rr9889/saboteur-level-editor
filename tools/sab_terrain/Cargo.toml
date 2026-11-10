@@ -1,0 +1,16 @@
+[package]
+name = "sab_terrain"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+sab_formats = { path = "../sab_formats" }
+memmap2 = "0.9"
+
+[features]
+retail = []
+
+[[test]]
+name = "terrain_retail"
+required-features = ["retail"]

@@ -1,0 +1,18 @@
+hash	name	grade	chance	kinds	sources
+0x05d7fc60	Position	structural	-	format-key	source-schema
+0x1e59e605	Looping	structural	-	format-key	source-schema
+0x246db06c	Game Event Name	structural	-	format-key	source-schema
+0x28e10525	Type	structural	-	format-key	source-schema
+0x42c6da9d	Sound Events	structural	-	format-key	source-schema
+0x4352aec0	FenceNode08	structural	-	format-key	source-schema
+0x4fb76002	ZAxis	structural	-	format-key	source-schema
+0x5b724250	Model	structural	-	format-key	source-schema
+0x5d78ede2	ClassName	structural	-	format-key	source-schema
+0x968ef994	Node05	structural	-	format-key	source-schema
+0xd0c26e7d	YAxis	structural	-	format-key	source-schema
+0xd76d7747	Sound Event Name	structural	-	format-key	source-schema
+0xdb0f705c	LuaParam	structural	-	format-key	source-schema
+0xf011157a	Texture	structural	-	format-key	source-schema
+0xfbb4bda8	XAxis	structural	-	format-key	source-schema
+0xfddc6371	FenceNodeFlag21	structural	-	format-key	source-schema
+0xfe05e733	FenceWallFlag12	structural	-	format-key	source-schema
